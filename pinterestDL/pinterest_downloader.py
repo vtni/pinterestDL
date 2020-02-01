@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import logging
 from PIL import Image
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 import urllib.request
 
 from pinterestDL.memory_set import MemorySet
@@ -232,7 +232,7 @@ class PinterestDownloader(object):
         # Pick a minimal image resolution
         min_x, min_y = [int(r) for r in min_resolution.split("x")]
         self.size_verifier = _get_size_verifier(min_x, min_y, size_compare_mode)
-        self._webdriver = webdriver.Firefox
+        self._webdriver = webdriver.Chrome
 
     def __enter__(self):
         """
@@ -240,6 +240,9 @@ class PinterestDownloader(object):
         """
         options = Options()
         options.add_argument("--headless")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+
         self.browser = self._webdriver(options=options)
         return self
 
