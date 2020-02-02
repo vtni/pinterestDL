@@ -1,5 +1,7 @@
 # PinterestDL: Easily download Pinterest boards and tag pages
 
+[Colab Sample ](https://colab.research.google.com/github/ozgurshn/pinterestDL/blob/master/PinterestParser.ipynb)
+
 This python script allows you to download pinterest pages in a fast way, filtered by size of the images, and many more options.
 **Warning**: Some functionality currently does not behave as expected.
 The website scraping should be re-written, but I currently don't have time for this.
