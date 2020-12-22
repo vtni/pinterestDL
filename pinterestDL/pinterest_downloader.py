@@ -4,6 +4,7 @@ import concurrent.futures
 from datetime import datetime
 import os
 from time import sleep
+import re
 
 from bs4 import BeautifulSoup
 import logging
@@ -65,7 +66,8 @@ def find_high_res_links(body):
     """
     soup = BeautifulSoup(body.get_attribute("outerHTML"), "html.parser")
     low_res_imgs = soup.find_all("img")
-    return [img["src"] for img in low_res_imgs], len(low_res_imgs)
+    p = re.compile("(https:\/\/[\w\.]+\/)(\w+)(\/(.*))", re.VERBOSE)
+    return [p.sub(r'\1originals\3', img["src"]) for img in low_res_imgs], len(low_res_imgs)
 
 
 def retrieve_bord_info(board_url, download_folder, body, num_pins=None, board_name=None):
